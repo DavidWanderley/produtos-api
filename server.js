@@ -15,4 +15,7 @@ try {
 } catch (err) {
     console.error("Erro ao conectar ao banco de dados:", $(err));
 }
- 
+
+const result = await pool.query('SELECT * FROM produtos');
+
+console.log(result.rows);
