@@ -1,4 +1,6 @@
 import express from 'express';
+
+import './models/produtos.model.js';
 import { sequelize } from './config/database.js';
 
 const HOST = '127.0.0.1'
@@ -12,20 +14,6 @@ app.use(express.json())
 app.get('/', (req, res) => {
     res.send('API de Produtos funcionando 🚀');
 })
-
-
-try {
-    await sequelize.authenticate()
-    console.log('🟢 Conectado ao banco de dados!');
-} catch (error) {
-    console.error('🔴 Erro ao conectar no banco:', error);
-}
-
-//Iniciando o server
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://${HOST}:${PORT}`);
-})
-
 
 async function start() {
   try {
