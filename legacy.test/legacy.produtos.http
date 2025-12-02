@@ -1,0 +1,27 @@
+# buscando todos os produtos
+GET http://localhost:3000/produtos
+
+#### buscando um produto pelo ID
+GET http://localhost:3000/produtos/1
+
+### criando um novo produto
+POST http://localhost:3000/produtos
+Content-Type: application/json
+
+{
+  "nome": "Notebook Avell Ion A52R",
+  "preco": 6500.00
+}
+
+### atualizando um produto
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Notebook Avell Ion A52R Pro",
+  "preco": 7000.00
+}
+
+### deletando um produto
+DELETE http://localhost:3000/produtos/1
+Content-Type: application/json
