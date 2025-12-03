@@ -27,6 +27,15 @@ app.post('/produto', async (req, res) => {
   }
 });
 
+app.get('/produtos', async (req, res) => {
+  try {
+    const produtos = await Produto.findAll();
+    res.status(200).json({ mensagem: 'Sucesso ao encontrar os produtos', size: produtos.length , data: produtos });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar produtos' });
+  }
+})
+
 async function start() {
   try {
     await sequelize.authenticate();
