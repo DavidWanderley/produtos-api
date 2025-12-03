@@ -2,9 +2,10 @@ import express from 'express';
 
 import './models/produtos.model.js';
 import { sequelize } from './config/database.js';
+import { Produto } from './models/produtos.model.js';
 
 const HOST = '127.0.0.1'
-const PORT = '5000'
+const PORT = process.env.PORT || '5000'
 
 const app = express();
 
@@ -15,6 +16,17 @@ app.get('/', (req, res) => {
     res.send('API de Produtos funcionando 🚀');
 })
 
+app.post('/produto', async (req, res) => {
+  try {
+    const payload = await req.body;
+    const novoProduto = await Produto.create(payload);
+    
+    res.status(201).json({ mensagem: 'Produto criado com sucesso', data: novoProduto });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao criar o produto' });
+  }
+});
+
 async function start() {
   try {
     await sequelize.authenticate();
@@ -23,7 +35,7 @@ async function start() {
     await sequelize.sync();
     console.log("📦 Modelos sincronizados com o banco!");
 
-    app.listen(process.env.PORT, () =>
+    app.listen(PORT, () =>
       console.log(`🚀 Servidor rodando na porta http://${HOST}:${PORT}`)
     );
   } catch (err) {
